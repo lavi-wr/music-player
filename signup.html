@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Mood Music Mapper</title>
+    <style>
+        body {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+            url('https://cdn.dribbble.com/userupload/42259831/file/original-7824f335d663467e4c7a3313f3e20cd8.gif');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 2rem;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+           .input-group {
+            position: relative;
+            width: 100%;
+      
+        }
+         .toggle-password {
+            position: absolute;
+            top: 35%;
+            right: 5px;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .signup-container {
+            max-width: 400px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 20px;
+            box-shadow: 0 0 25px rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .signup-form h2 {
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+            text-shadow: 1px 1px 4px #000;
+            font-family: cursive;
+        }
+
+        .form-subtitle {
+            color: #ddd;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .signup-form input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .signup-form input::placeholder {
+            color: #ccc;
+        }
+
+        .signup-btn {
+            width: 100%;
+            padding: 0.8rem;
+background: linear-gradient(to right, #2b3f60, #9c419a);    
+        border: none;
+            border-radius: 50px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .signup-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 15px rgba(255,255,255,0.3);
+        }
+
+        .form-footer {
+            color: #ccc;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .form-footer a {
+            color: #ff4ecd;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="signup-container">
+        <form class="signup-form" onsubmit="return handleSignup()">
+            <h2>🎵 Create Your Account</h2>
+            <p class="form-subtitle">Join the Mood Music Mapper</p>
+
+            <input type="text" id="fullname" placeholder="Full Name" onblur = "capitalise()" autofocus required>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <div class="input-group">
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="button" class="toggle-password" onclick="toggleVisibility('password', this)">👁️</button>
+        </div>
+
+        <div class="input-group">
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+            <button type="button" class="toggle-password" onclick="toggleVisibility('confirmPassword', this)">👁️</button>
+        </div>
+
+            <button type="submit" class="signup-btn">Sign Up</button>
+
+            <p class="form-footer">Already have an account? <a href="signin.html">Login</a></p>
+        </form>
+    </div>
+
+    <script>
+        function handleSignup() {
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return false;
+            }
+            alert("sign up successful! Redirecting to the music player...");
+
+            // Redirect to login or home page after successful sign up
+            window.location.href = "index5.html"; 
+            return false; // prevent form submission
+        }
+        function capitalise() {
+            var input = document.getElementById("fullname");
+            input.style.textTransform = "capitalize";
+        }
+          function toggleVisibility(fieldId, btn) {
+        var input = document.getElementById(fieldId);
+        if (input.type === "password") {
+            input.type = "text";
+            btn.textContent = "🙈";
+        } else {
+            input.type = "password";
+            btn.textContent = "👁️";
+        }
+    }
+    </script>
+
+</body>
+</html>

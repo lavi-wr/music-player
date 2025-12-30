@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mood Music Mapper</title>
+        <style>
+       
+        body {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                        url('https://cdn.dribbble.com/userupload/42259831/file/original-7824f335d663467e4c7a3313f3e20cd8.gif');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 2rem;
+     
+        }
+
+        .container {
+            max-width: 1200px;
+            background-color: rgba(15, 14, 23, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+           
+        }
+
+        header {
+            background: linear-gradient(to right, #2b3f60, #9c419a);
+            color: #ffffff;
+            padding: 2rem;
+            text-align: center;
+            text-shadow: 1px 1px 5px #000;
+           
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-family: cursive;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+         
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        .mood-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .mood-btn {
+            padding: 0.8rem 1.5rem;
+           
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+           
+            align-items: center;
+           
+            color: #fff;
+            border: 1px solid #fff;
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        .happy { background-color: #1e524b; }
+        .sad { background-color: #c064a6; }
+        .energetic { background-color: #288057; }
+        .chill { background-color: #341c56; }
+        .romantic { background-color: #285c51; }
+
+        .mood-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(255,255,255,0.5);
+        }
+
+        .mood-btn.active {
+            border: 2px solid #fff;
+            transform: scale(1.15);
+        }
+
+        .results-container {
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 1rem;
+            min-height: 300px;
+            transition: all 0.3s ease;
+           
+        }
+
+        .mood-display {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-align: center;
+            color: #ffffff;
+            text-shadow: 1px 1px 3px #000;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .song-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .song-card {
+            background-color: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            border-radius: 8px;
+            overflow:hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+            padding: 1rem;
+           
+        }
+        .song-card iframe {
+    display: block;
+    border: none;
+    border-radius:10px;
+    width: 100%;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+
+        .song-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            color: #f8f8f8;
+            font-size: 0.9rem;
+            background-color: rgba(0,0,0,0.6);
+           
+        }
+    </style>
+    </head>
+    <body>
+
+        <div class="container">
+            <header>
+                <h1>Mood Music Mapper</h1>
+                <p class="subtitle">Discover perfect songs for every mood</p>
+            </header>
+
+            <main>
+                <div class="mood-selector">
+                    <button class="mood-btn romantic"
+                        onclick="selectMood('romantic')">❤ Romantic</button>
+                    
+                    <button class="mood-btn sad" onclick="selectMood('sad')">😢
+                        Sad</button>
+                    <button class="mood-btn energetic"
+                        onclick="selectMood('energetic')">⚡ Energetic</button>
+                    <button class="mood-btn chill"
+                        onclick="selectMood('chill')">🍃 Chill</button>
+                    <button class="mood-btn happy"
+                        onclick="selectMood('happy')">😊 Happy</button>
+                </div>
+
+                <div class="results-container">
+                    <h2 class="mood-display">Select a mood to get started</h2>
+                    <div id="songList" class="song-list"></div>
+                </div>
+            </main>
+
+            <footer>
+                <p>© 2025 Mood Music Mapper | Find the perfect soundtrack for
+                    every emotion</p>
+            </footer>
+        </div>
+
+        <script>
+var moodSongs = {
+  happy: [
+
+  {
+    title: "High Heels",
+    artist: "Yo Yo Honey Singh & Jaz Dhami",
+    spotifyUrl: "https://open.spotify.com/embed/track/2wSWVVClkhu7JahleyZL99",
+    youtubeUrl: "https://www.youtube.com/embed/Tkgad9gngOQ",
+  },
+  {
+    title: "Dil Lutiya",
+    artist: "Yo Yo Honey Singh",
+    spotifyUrl: "https://open.spotify.com/embed/track/6iBhOcAlPA8ma4yuzm2Jpi",
+    youtubeUrl: "https://www.youtube.com/embed/6FjbAnaPRPwiP3sciEYctO",
+  },
+  {
+    title: "Espresso",
+    artist: "Sabrina Carpenter",
+    spotifyUrl: "https://open.spotify.com/embed/track/2qSkIjg1o9h3YT9RAgYN75",
+    youtubeUrl: "https://www.youtube.com/embed/eVli-tstM5E",
+  },
+  {
+    title: "S.I.D.H.U",
+    artist: "Kailash Kher",
+    spotifyUrl:"",
+    youtubeUrl:"https://www.youtube.com/embed/h_rRPmPiHcM",
+  },
+  {
+    title: "Beautiful Things",
+    artist: "Benson Boone",
+    spotifyUrl: "https://open.spotify.com/embed/track/6tNQ70jh4OwmPGpYy6R2o9",
+    youtubeUrl: "https://www.youtube.com/embed/kIft-LUHHVA",
+  },
+  {
+    title: "Brown Rang",
+    artist: "Yo Yo Honey Singh",
+    spotifyUrl: "https://open.spotify.com/embed/track/3yRLROmAcKJBqTrdEczFB8",
+    youtubeUrl: "https://www.youtube.com/embed/eizmCZv3aKI",
+  },
+
+],
+
+  chill: [
+    {
+      title: "Dikkat",
+      artist: "Seedhe Maut",
+      spotifyUrl: "https://open.spotify.com/embed/track/0CR40DgJsAKNdEjIyctuU5",
+      youtubeUrl: "https://www.youtube.com/embed/hJfQ-J6SLlk"
+    },
+    {
+      title: "Best Song Ever",
+      artist: "One Direction",
+      spotifyUrl: "https://open.spotify.com/embed/track/4prdv4iwy6d6VZDDTqTCmo",
+      youtubeUrl: "https://www.youtube.com/embed/z7IKziU8Dt4"
+    },
+    {
+      title: "Robbery",
+      artist: "Juice Wrld",
+      spotifyUrl: "https://open.spotify.com/embed/track/6Hj9jySrnFppAI0sEMCZpJ",
+      youtubeUrl: "https://www.youtube.com/embed/iI34LYmJ1Fs"
+    },
+    {
+      title: "Bas Jhut",
+      artist: "Seedhe Maut",
+      spotifyUrl: "https://open.spotify.com/embed/track/3kz4jEzCEVCgUz41wFioxN",
+      youtubeUrl: "https://www.youtube.com/embed/rtMR_JEKGhw"
+    },
+    {
+      title: "ANTIDOTE",
+      artist: "Karan Aujla",
+      spotifyUrl: "https://open.spotify.com/embed/track/7KmCQLSSde0UX5OqCgvGN9",
+      youtubeUrl: "https://www.youtube.com/embed/JgDnA28O4ho"
+    },
+  ],
+  romantic: [
+
+     {
+    title: "Raabta",
+    artist: "Arijit Singh, Aditi Singh Sharma, et al.",
+    spotifyUrl: "https://open.spotify.com/embed/track/6FjbAnaPRPwiP3sciEYctO",
+    youtubeUrl: "https://www.youtube.com/embed/6FjbAnaPRPwiP3sciEYctO",
+  },
+  {
+    title: "Tum Mile",
+    artist: "Neeraj Shridhar",
+    spotifyUrl: "https://open.spotify.com/embed/track/1EjxJHY9A6LMOlvyZdwDly",
+    youtubeUrl: "https://www.youtube.com/embed/1EjxJHY9A6LMOlvyZdwDly",
+  },
+    {
+      title: "Since Tum",
+      artist: "Talha Anjum",
+      spotifyUrl: "https://open.spotify.com/embed/track/5GnF4uvEcIibqcoYgzIlgS",
+      youtubeUrl: "https://www.youtube.com/embed/y6l8qWxyUPU"
+    },
+    {
+      title: "Baat Bangayi",
+      artist: "Rawal & Bharg",
+      spotifyUrl: "https://open.spotify.com/embed/track/0hnHxTlTDjYysw9mf5BgxA",
+      youtubeUrl: "https://www.youtube.com/embed/ueK0LnEraAU"
+    },
+    {
+      title: "Dhun",
+      artist: "Arijit Singh",
+      spotifyUrl: "https://open.spotify.com/embed/track/1GFQthxDi4Tqe3wJ5j0G5S",
+      youtubeUrl: "https://www.youtube.com/embed/COuGgctJ91A?",
+    },
+    {
+      title: "Aankhon Se Batana",
+      artist: "Dikshant",
+      spotifyUrl: "https://open.spotify.com/embed/track/1ZiReD9pPTttQWwSoYqdyH",
+      youtubeUrl: "https://www.youtube.com/embed/2vKMY75kvjI",
+    },
+    {
+      title: "Tum Ho Toh",
+      artist: "Vishal Mishra",
+      spotifyUrl: "https://open.spotify.com/embed/track/6G8vN5EUtcDxOXOXadF6kp",
+      youtubeUrl: "https://www.youtube.com/embed/cO44BqIhKdg",
+    },
+    {
+      title: "Dil Mere",
+      artist: "The Local Train",
+      spotifyUrl: "https://open.spotify.com/embed/track/0XF0D8HL9gk2sr9tlFOee3",
+      youtubeUrl: "https://www.youtube.com/embed/qLCLvzTGFVM",
+    },
+  ],
+
+   sad: [
+   
+
+    {
+    title: "Fortnight",
+    artist: "Taylor Swift",  
+    spotifyUrl: "https://open.spotify.com/embed/track/2OzhQlSqBEmt7hmkYxfT6m",
+    youtubeUrl: "https://www.youtube.com/embed/q3zqJs7JUCQ",
+   },
+  {
+    title: "Main Rooyan",
+    artist: "Tanveer Evan",
+    spotifyUrl: "https://open.spotify.com/embed/track/1qmHr1OlmHiHPKX4GuUWnz",
+    youtubeUrl: "https://www.youtube.com/embed/-3d1PB3SU3c",
+  },
+  {
+    title: "Dariya",
+    artist: "Arko",
+    spotifyUrl: "https://open.spotify.com/embed/track/4ulISxSlTF9LXHs9dir9Z1",
+    youtubeUrl: "https://www.youtube.com/embed/MDwVsoIen3k",
+  },
+{
+  title: "Banjaara",
+  artist: "Ankit Tiwari",
+  spotifyUrl: "https://open.spotify.com/embed/track/2S6N9pbnkhQRyAx80HmF79",
+  youtubeUrl: "https://www.youtube.com/embed/0NFxcNheoLc",
+  youtubeLink: "https://youtu.be/0NFxcNheoLc",
+  thumbnail: "https://www.google.com/imgres?q=banjaara%20song&imgurl=https%3A%2F%2Fi.ytimg.com%2Fvi%2F0NFxcNheoLc%2Fmaxresdefault.jpg&imgrefurl=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D0NFxcNheoLc&docid=3NQCxd_WNz03-M&tbnid=npwEhVxUgPhHtM&vet=12ahUKEwj5kdi1vZCPAxVfxDgGHU8XIZoQM3oECBYQAA..i&w=1280&h=720&hcb=2&ved=2ahUKEwj5kdi1vZCPAxVfxDgGHU8XIZoQM3oECBYQAA"
+},
+
+    {
+      title: "Snap Back",
+      artist: "Twenty One Pilots",
+      spotifyUrl: "https://open.spotify.com/embed/track/5QPGnFslbDUQ7mDteKn3By",
+      youtubeUrl: "https://www.youtube.com/embed/eZptwvjKjk4"
+    },
+    {
+      title: "Save Your Tears",
+      artist: "The Weeknd",
+      spotifyUrl: "https://open.spotify.com/embed/track/5QO79kh1waicV47BqGRL3g",
+      youtubeUrl: "https://www.youtube.com/embed/u6lihZAcy4s"
+    },
+    {
+      title: "Good News",
+      artist: "Mac Miller",
+      spotifyUrl: "https://open.spotify.com/embed/track/1DWZUa5Mzf2BwzpHtgbHPY",
+      youtubeUrl: "https://www.youtube.com/embed/aIHF7u9Wwiw" 
+    },
+    {
+      title: "Jo Bhi Main",
+      artist: "Mohit Chauhan",
+      spotifyUrl: "https://open.spotify.com/embed/track/5ERpz1HQfUGVaUQApe6xgb",
+      youtubeUrl: "https://www.youtube.com/embed/_kOzFMR9Hys", 
+    },
+  ],
+
+  energetic: [
+    {
+      title: "Dope Shope",
+      artist: "Yo Yo Honey Singh",
+      spotifyUrl: "https://open.spotify.com/embed/track/3pVXZ04pu8zYaiAHCrh6PV",
+      youtubeUrl: "https://www.youtube.com/embed/C6xvQ4_l6WI",
+    },
+
+    {
+   title: "OH HO HO HO",
+   artist: "Sukhbir",
+   spotifyUrl: "https://open.spotify.com/embed/track/3NpNTYETMcXspfs8hE8T7h",
+   youtubeUrl: "https://www.youtube.com/embed/-99Z8E1pOrs",
+   },
+
+    {
+      title: "Daaru Party",
+      artist: "Millind Gaba",
+      spotifyUrl: "https://open.spotify.com/embed/track/0iGg0iJh7eqqnNaobUtKaD",
+      youtubeUrl: "https://www.youtube.com/embed/Wr2NN4VQ1nI",
+    },
+    {
+      title: "Sadi Gali",
+      artist: "Lehmber Hussainpuri / Falak Shabbir",
+      spotifyUrl: "https://open.spotify.com/embed/track/3ktSSskwXLO8qhqx1uFvuH",
+      youtubeUrl: "https://www.youtube.com/embed/FhDl8W0cBls"
+    },
+    {
+      title: "Chavanprash",
+      artist: "Divya Kumar et al.",
+      spotifyUrl: "https://open.spotify.com/embed/track/06w2selQidraumTXgSs5sS",
+      youtubeUrl: "https://www.youtube.com/embed/j9665q9VPGg"
+    },
+    {
+      title: "Danza Kuduro",
+      artist: "Don Omar & Lucenzo",
+      spotifyUrl: "https://open.spotify.com/embed/track/3N4Qq4ENGEQbYuWCD3vSnf",
+      youtubeUrl: "https://www.youtube.com/embed/7zp1TbLFPp8"
+    }
+  ],
+};
+
+
+    function selectMood(mood) {
+        displaySongsForMood(mood);
+        highlightActiveButton(mood);
+    }
+
+    function displaySongsForMood(mood) {
+        var moodDisplay = document.querySelector('.mood-display');
+        var songListElement = document.getElementById('songList');
+
+        moodDisplay.textContent = 'Songs for ' + capitalizeFirstLetter(mood) + ' Mood';
+        songListElement.innerHTML = '';
+
+        var songs = moodSongs[mood] || [];
+
+        if (songs.length === 0) {
+            songListElement.innerHTML = '<div class="loading">No songs found for this mood</div>';
+            return;
+        }
+
+        for (var i = 0; i < songs.length; i++) {
+            var song = songs[i];
+            var songCard = document.createElement('div');
+            songCard.className = 'song-card';
+
+            songCard.innerHTML = '<h3>' + song.title + '</h3>' +
+'<p>' + song.artist + '</p>' +
+'<iframe src="' + song.spotifyUrl + '" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>' +
+'<iframe src="' + song.youtubeUrl + '" width="100%" height="200" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+;
+
+            songListElement.appendChild(songCard);
+        }
+    }
+
+   function highlightActiveButton(mood) {
+    var buttons = document.querySelectorAll('.mood-btn');
+   
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('active');
+    }
+
+    var activeButton = document.querySelector('.' + mood);
+    if (activeButton) {
+        activeButton.classList.add('active');
+    }
+}
+
+
+    function capitalizeFirstLetter(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+</script>
+
+    </body>
+</html>
