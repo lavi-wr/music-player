@@ -3,6 +3,8 @@
 Mood Music Mapper is a frontend web application that recommends and organizes music based on the user’s mood.  
 The project is built using **HTML, CSS, and Vanilla JavaScript**, with a clean folder structure, authentication flow, and persistent data storage using `localStorage`.
 
+🔗 Live Demo: https://music-player-lemon-omega.vercel.app
+
 ---
 
 ## 🚀 Features
@@ -98,6 +100,7 @@ music-player/
    git clone https://github.com/your-username/music-player.git
 Open index.html in a browser
 (or use Live Server for best experience)
+
 
 ---
 
