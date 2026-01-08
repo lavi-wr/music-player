@@ -1,0 +1,71 @@
+<script>
+  if (!localStorage.getItem("isLoggedIn")) {
+    window.location.href = "pages/signin.html";
+  }
+</script>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel = "stylesheet" href = "css\main.css">
+        <title>Mood Music Mapper</title>
+      
+    </head>
+    <body>
+
+        <div class="container">
+           <header>
+  <h1>Mood Music Mapper</h1>
+  <p class="subtitle">Discover perfect songs for every mood</p>
+
+  <button class="logout-btn" onclick="logout()">Logout</button>
+</header>
+
+
+            <main>
+                <div class="mood-selector">
+                    <button class="mood-btn romantic"
+                        onclick="selectMood('romantic')">❤ Romantic</button>
+                    
+                    <button class="mood-btn sad" onclick="selectMood('sad')">😢
+                        Sad</button>
+                    <button class="mood-btn energetic"
+                        onclick="selectMood('energetic')">⚡ Energetic</button>
+                    <button class="mood-btn chill"
+                        onclick="selectMood('chill')">🍃 Chill</button>
+                    <button class="mood-btn happy"
+                        onclick="selectMood('happy')">😊 Happy</button>
+                </div>
+
+                <div class="results-container">
+                    <h2 class="mood-display">Select a mood to get started</h2>
+                    <div id="songList" class="song-list"></div>
+                </div>
+            </main>
+
+            <footer>
+                <p>© 2025 Mood Music Mapper | Find the perfect soundtrack for
+                    every emotion</p>
+            </footer>
+        </div>
+<script src="js/data.js"></script>
+<script src="js/player.js"></script>
+<script src="js/auth.js"></script>
+
+
+     
+<div id="songModal">
+    <div class="modal-content">
+      <h3>Add Song</h3>
+      <input type="text" id="modalTitle" placeholder="Song Title">
+      <input type="text" id="modalArtist" placeholder="Artist Name">
+      <input type="url" id="modalSpotify" placeholder="Spotify Link">
+      <input type="url" id="modalYoutube" placeholder="YouTube Link">
+      <button class="save-btn" onclick="saveSong()">Save</button>
+      <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+
+    </body>
+</html>

@@ -1,0 +1,115 @@
+
+body {
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url('https://cdn.dribbble.com/userupload/42259831/file/original-7824f335d663467e4c7a3313f3e20cd8.gif');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  padding: 2rem;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form-subtitle {
+  color: #ddd;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.form-footer {
+  color: #ccc;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.form-footer a {
+  color: #ff4ecd;
+  text-decoration: none;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 5px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.signup-container {
+  max-width: 400px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+.signup-form h2 {
+  font-size: 2rem;
+  text-shadow: 1px 1px 4px #000;
+  font-family: cursive;
+}
+
+.signup-form input {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border: none;
+}
+
+.signup-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background: linear-gradient(to right, #2b3f60, #9c419a);
+  border-radius: 50px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-container {
+  max-width: 400px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+.login-form h2 {
+  font-size: 2rem;
+  font-family: cursive;
+  text-shadow: 1px 1px 4px #000;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border: none;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background: linear-gradient(to right, #2b3f60, #9c419a);
+  border-radius: 50px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+

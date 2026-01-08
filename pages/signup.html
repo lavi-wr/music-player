@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = "..\css\auth.css">
+    <title>Sign Up - Mood Music Mapper</title>
+  
+</head>
+<body>
+
+    <div class="signup-container">
+        <form class="signup-form" onsubmit="return handleSignup()">
+            <h2>🎵 Create Your Account</h2>
+            <p class="form-subtitle">Join the Mood Music Mapper</p>
+
+            <input type="text" id="fullname" placeholder="Full Name" onblur = "capitalise()" autofocus required>
+            <input type="email" id="email" placeholder="Email Address" required>
+             <input type="password" id="password" placeholder="Password" required>
+              <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+           
+
+            <button type="submit" class="signup-btn">Sign Up</button>
+
+            <p class="form-footer">Already have an account? <a href="signin.html">Login</a></p>
+        </form>
+    </div>
+
+   <script src="../js/auth.js"></script>
+
+
+</body>
+</html>
