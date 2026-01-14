@@ -45,42 +45,26 @@ The project is built using **HTML, CSS, and Vanilla JavaScript**, with a clean f
 
 ## 📁 Project Structure
 
-
+```
 music-player/
-
 │
-
 ├─ index.html # Main music player (protected)
-
 │
-
 ├─ css/
-
 │ ├─ auth.css # Signin / Signup styles
-
 │ └─ main.css # Music player styles
-
 │
-
 ├─ js/
-
 │ ├─ auth.js # Authentication logic
-
 │ ├─ data.js # Mood data + localStorage handling
-
 │ └─ player.js # Player & UI logic
-
 │
-
 ├─ pages/
-
 │ ├─ signin.html # Entry point
-
 │ └─ signup.html
-
 │
-
 └─ assets/ # Images / audio (optional)
+```
 
 ---
 
